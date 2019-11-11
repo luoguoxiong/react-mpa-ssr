@@ -25,6 +25,9 @@ module.exports = {
     publicPath: '/',
     chunkFilename: `${prefixName}.js`
   },
+  performance: {
+    hints: false
+  },
   module: {
     rules: [
       {

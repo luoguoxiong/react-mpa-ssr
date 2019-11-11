@@ -9,13 +9,10 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
-
 const prodConfig = cloneDeep(baseConfig)
 
 prodConfig.mode = 'production'
 
-prodConfig.plugins.push(new HardSourceWebpackPlugin())
 if (process.env.Analyze) {
   prodConfig.plugins.push(new BundleAnalyzerPlugin())
 }

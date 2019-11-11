@@ -12,6 +12,12 @@ cnpm install webpack webpack-cli -D
 
 ``` shell
 cnpm install @babel/core @babel/preset-env @babel/preset-react babel-loader core-js @babel/cli -D
+
+cnpm install  @babel/plugin-proposal-class-properties -D
+
+cnpm install @babel/plugin-proposal-decorators -D 
+
+cnpm  install -D babel-plugin-module-resolver
 ```
 
 > 3. 添加.babelrc配置文件
@@ -41,11 +47,24 @@ cnpm install @babel/core @babel/preset-env @babel/preset-react babel-loader core
 cnpm i mini-css-extract-plugin webpackbar webpack-manifest-plugin react-loadable -D
 
 cnpm install lodash webpack-bundle-analyzer uglifyjs-webpack-plugin optimize-css-assets-webpack-plugin hard-source-webpack-plugin -D
+
+cnpm install less less-loader css-loader -D
 ```
 
 > 4. 安装react相关包
 
 ```sh
 cnpm install react react-dom -S
+cnpm install react-loadable react-router-dom react-redux @rematch/core -S
 ```
+
+> 5. 安装相关启动包
+
+```shell
+cnpm install cross-env nodemon npm-run-all -D
+```
+
+> 6. 安装兼容IE9包
+
+> cnpm install react-app-polyfill -D
 

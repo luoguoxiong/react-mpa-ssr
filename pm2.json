@@ -1,0 +1,18 @@
+{
+  "apps": [
+    {
+      "name": "reactSSr",
+      "script": "bin/index.js",
+      "exec_mode": "fork",
+      "instances": 1,
+      "max_memory_restart": "1G",
+      "autorestart": true,
+      "node_args": [],
+      "watch": true,
+      "args": [],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
