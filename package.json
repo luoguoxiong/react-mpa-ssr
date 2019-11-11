@@ -1,0 +1,22 @@
+{
+  "name": "nsp",
+  "version": "1.0.0",
+  "description": "nsp是koa+react服务端渲染框架",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Peroluo/NSP.git"
+  },
+  "keywords": [
+    "react",
+    "nsp"
+  ],
+  "author": "luoguoxiong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Peroluo/NSP/issues"
+  },
+  "homepage": "https://github.com/Peroluo/NSP#readme"
+}
