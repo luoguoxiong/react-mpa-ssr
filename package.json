@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "nsp是koa+react服务端渲染框架",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "router": "nodemon bin/routerAnalyze.js -w ./src/page  -w ./src/routes.js",
+    "dev": "cross-env NODE_ENV=development nodemon bin/index.js",
+    "build": "run-s build:router build:webpack",
+    "build:router": "node bin/routerAnalyze.js",
+    "build:webpack": "cross-env NODE_ENV=production webpack --config  webpack/webpack.config.prod.js",
+    "analyze": "run-s build:router analyze:webpack",
+    "analyze:webpack": "cross-env NODE_ENV=production Analyze=true webpack --config  webpack/webpack.config.prod.js",
+    "start": "cross-env NODE_ENV=production node bin/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +25,31 @@
   "bugs": {
     "url": "https://github.com/Peroluo/NSP/issues"
   },
-  "homepage": "https://github.com/Peroluo/NSP#readme"
+  "homepage": "https://github.com/Peroluo/NSP#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "babel-loader": "^8.0.6",
+    "core-js": "^3.4.0",
+    "cross-env": "^6.0.3",
+    "hard-source-webpack-plugin": "^0.13.1",
+    "lodash": "^4.17.15",
+    "mini-css-extract-plugin": "^0.8.0",
+    "nodemon": "^1.19.4",
+    "npm-run-all": "^4.1.5",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "react-loadable": "^5.5.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-manifest-plugin": "^2.2.0",
+    "webpackbar": "^4.0.0"
+  },
+  "dependencies": {
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  }
 }
