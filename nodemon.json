@@ -1,3 +1,6 @@
 {
-  "watch": ["./lib", "./service"]
+  "watch": [
+    "./lib",
+    "./service"
+  ]
 }

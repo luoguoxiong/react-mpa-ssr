@@ -6,17 +6,27 @@ import Loadable from 'react-loadable'
 
 import R from 'ramda'
 
-import { join } from 'path'
+import { join, resolve } from 'path'
 
 import dev from './utils/dev'
 
 import chalk from 'chalk'
 
-global.config = config
+import RouterAnalyze from '@lib/routerAnalyze'
 
-const { port, env } = config
+const { port, env } = global.config = config
+
+const app = new Koa()
+
+const entry = resolve(__dirname, '../src/page')
+
+const output = resolve(__dirname, '../src/.nsp/router.js')
+
 let middlewares = ['bodyParser', 'views', 'staticCache', 'router']
+
 let isListen = false
+
+let hmrKeyT = null
 
 const useMiddlewares = app => {
   const joinPathName = moduleName =>
@@ -50,28 +60,31 @@ const useMiddlewares = app => {
     isListen = true
   }
 }
-const app = new Koa()
-let hmrKeyT = null
+
 
 if (env === 'development') {
-  dev(app, hotMiddleware => {
-    if (hotMiddleware && typeof hotMiddleware.publish === 'function') {
-      if (hmrKeyT) global.clearInterval(hmrKeyT)
-      // 生成当前的热更新的key值
-      const hmrKey = Math.random() * 100000 + ''
-      hotMiddleware.publish({
-        action: 'bundled',
-        hmrKey
-      })
-      hmrKeyT = global.setInterval(() => {
+  new RouterAnalyze(entry, output, () => {
+    dev(app, hotMiddleware => {
+      if (hotMiddleware && typeof hotMiddleware.publish === 'function') {
+        if (hmrKeyT) global.clearInterval(hmrKeyT)
+        // 生成当前的热更新的key值
+        const hmrKey = Math.random() * 100000 + ''
         hotMiddleware.publish({
           action: 'bundled',
           hmrKey
         })
-      }, 2000)
-      useMiddlewares(app)
-    }
-  })
+        hmrKeyT = global.setInterval(() => {
+          hotMiddleware.publish({
+            action: 'bundled',
+            hmrKey
+          })
+        }, 2000)
+        useMiddlewares(app)
+      }
+    })
+  }).init()
 } else {
   useMiddlewares(app)
 }
+
+

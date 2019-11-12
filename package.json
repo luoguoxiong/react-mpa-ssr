@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "nsp是koa+react服务端渲染框架",
   "scripts": {
-    "router": "nodemon bin/routerAnalyze.js -w ./src/page  -w ./src/routes.js",
+    "router": "nodemon bin/routerAnalyze.js -w ./src/page",
     "dev": "cross-env NODE_ENV=development nodemon node bin/index.js",
-    "build": "run-s build:router build:webpack",
+    "build": "run-s build:router build:webpack build:start",
     "build:router": "node bin/routerAnalyze.js",
+    "build:start": "cross-env NODE_ENV=production node bin/index.js",
     "build:webpack": "cross-env NODE_ENV=production webpack --config  webpack/webpack.config.prod.js",
     "analyze": "run-s build:router analyze:webpack",
-    "analyze:webpack": "cross-env NODE_ENV=production Analyze=true webpack --config  webpack/webpack.config.prod.js",
-    "start": "cross-env NODE_ENV=production node bin/index.js"
+    "analyze:webpack": "cross-env NODE_ENV=production Analyze=true webpack --config  webpack/webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
