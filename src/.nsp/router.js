@@ -2,13 +2,6 @@ import React, { Fragment } from 'react'
 import Route from '@lib/route'
 import Loadable from 'react-loadable'
 
-const Cwdetailwan = Loadable({
-  loader: () => import(/* webpackChunkName: 'Cwdetailwan' */ '../page/detail/an'),
-  loading: () => {
-    return null
-  }
-})
-
 const Cwdetail = Loadable({
   loader: () => import(/* webpackChunkName: 'Cwdetail' */ '../page/detail'),
   loading: () => {
@@ -38,9 +31,6 @@ const Cwuser = Loadable({
 })
 
 const routes = [{
-  path: '/detail/an',
-  component: <Cwdetailwan/>
-},{
   path: '/detail',
   component: <Cwdetail/>
 },{
