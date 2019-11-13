@@ -12,19 +12,19 @@ import dev from './utils/dev'
 
 import chalk from 'chalk'
 
+import chokidar from 'chokidar'
+
 import RouterAnalyze from '@lib/routerAnalyze'
 
 const { port, env } = global.config = config
 
 const app = new Koa()
 
-const entry = resolve(__dirname, '../src/page')
-
-const output = resolve(__dirname, '../src/.nsp/router.js')
-
 let middlewares = ['bodyParser', 'views', 'staticCache', 'router']
 
-let isListen = false
+let watcherIsInit = false
+
+global.devIsRun = false
 
 let hmrKeyT = null
 
@@ -47,7 +47,7 @@ const useMiddlewares = app => {
   )
   // R.map把middlewares作为参数，执行Rcompose的第一个函数
   R.map(Rcompose)(middlewares)
-  if (!isListen) {
+  if (!devIsRun) {
     Loadable.preloadAll().then(() => {
       app.listen(port, err => {
         console.log(
@@ -56,33 +56,64 @@ const useMiddlewares = app => {
           )
         )
       })
+      devIsRun = true
     })
-    isListen = true
   }
 }
 
-
-if (env === 'development') {
+const useHotDev = (callback) => {
+  const entry = resolve(__dirname, '../src/page')
+  const output = resolve(__dirname, '../src/.nsp/router.js')
   new RouterAnalyze(entry, output, () => {
     dev(app, hotMiddleware => {
       if (hotMiddleware && typeof hotMiddleware.publish === 'function') {
         if (hmrKeyT) global.clearInterval(hmrKeyT)
-        // 生成当前的热更新的key值
-        const hmrKey = Math.random() * 100000 + ''
-        hotMiddleware.publish({
-          action: 'bundled',
-          hmrKey
-        })
+        const hmrKey = new Date().getSeconds()
         hmrKeyT = global.setInterval(() => {
           hotMiddleware.publish({
             action: 'bundled',
             hmrKey
           })
-        }, 2000)
-        useMiddlewares(app)
+        }, 1000)
+        callback()
       }
     })
   }).init()
+}
+
+// 当初始化完成或者src/page文件发生改变时触发
+const devRun = (appRun) => {
+  const watcher = chokidar.watch(join(__dirname, '../src/page'), {
+    ignored: /(^|[\/\\])\../,
+    persistent: true
+  });
+  watcher.on('all', (event, path) => {
+    if (watcherIsInit) {
+      switch (event) {
+        case 'add': appRun(); break;
+        case 'unlink': appRun(); break;
+        case 'addDir': appRun(); break;
+        case 'unlinkDir': appRun(); break;
+      }
+    }
+  })
+    .on('ready', () => {
+      watcherIsInit = true;
+      appRun()
+      console.log(chalk.green('√ Initial watcher complete. Ready for changes'))
+    })
+}
+
+if (env === 'development') {
+  devRun(() => {
+    if (devIsRun) {
+      const entry = resolve(__dirname, '../src/page')
+      const output = resolve(__dirname, '../src/.nsp/router.js')
+      new RouterAnalyze(entry, output).init()
+    } else {
+      useHotDev(() => { useMiddlewares(app) })
+    }
+  })
 } else {
   useMiddlewares(app)
 }

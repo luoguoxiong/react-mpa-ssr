@@ -12,7 +12,7 @@ export default (app, serverCompilerDone) => {
   const koaWebpackHotMiddlewareObject = koaWebpackHotMiddleware(
     clientCompiler,
     {
-      heartbeat: 1000
+      heartbeat: 500
     }
   )
   let hotMiddleware = koaWebpackHotMiddlewareObject.hotMiddleware

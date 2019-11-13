@@ -6,7 +6,7 @@ class Admin {
   @JspRender({ title: '首页' })
   async home (ctx, next) {
     await next()
-    ctx.initModel = { goods: [1, 2, 3, 4] }
+    ctx.initModel = { goods: [1, 2, 3, 5, 6] }
   }
 
   @RequestMapping({ method: 'get', url: '/user' })
@@ -22,8 +22,6 @@ class Admin {
     await next()
     ctx.initModel = { user: 10 }
   }
-
-
 
   @RequestMapping({ method: 'get', url: '/goods' })
   @JspRender({ title: 'goods页' })
