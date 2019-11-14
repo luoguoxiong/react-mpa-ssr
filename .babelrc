@@ -4,8 +4,12 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": ["IE >= 9"]
+          "browsers": [
+            "IE >= 9"
+          ]
         }
+        // "corejs": "3",
+        // "useBuiltIns": "usage"
       }
     ],
     "@babel/preset-react"
@@ -23,7 +27,12 @@
         }
       }
     ],
-    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
     "react-loadable/babel",
     "@babel/plugin-transform-runtime",
     "@babel/plugin-proposal-class-properties"

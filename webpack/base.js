@@ -2,6 +2,8 @@ const path = require('path')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const HappyPack = require('happypack');
+
 const ProgressBarPlugin = require('webpackbar')
 // 服务器端render,可以根据当前的manifest，引入css和js文件
 const ManifestPlugin = require('webpack-manifest-plugin')
@@ -17,7 +19,7 @@ const prefixName =
 
 module.exports = {
   entry: {
-    assets: ['./src/index.js']
+    assets: ['./src/index.js'],
   },
   output: {
     filename: `${prefixName}.js`,
@@ -28,30 +30,24 @@ module.exports = {
   performance: {
     hints: false
   },
+  // externals: {
+  //   'react': 'React',
+  //   'react-dom': 'ReactDOM'
+  // },
   module: {
     rules: [
       {
         test: /\.js[x]?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader?cacheDirectory'
-        }
+        include: /src|lib/,
+        use: 'happypack/loader?id=js'
       },
       {
         test: /\.(css|less)$/,
+        include: /src/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development'
-            }
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'less-loader'
-          }
+          MiniCssExtractPlugin.loader,
+          'happypack/loader?id=styles'
         ]
       },
       {
@@ -69,6 +65,18 @@ module.exports = {
   },
   plugins: [
     new ProgressBarPlugin({ summary: false }),
+
+    new HappyPack({
+      id: 'js',
+      threads: 5,
+      loaders: ['babel-loader?cacheDirectory=true']
+    }),
+
+    new HappyPack({
+      id: 'styles',
+      threads: 3,
+      loaders: ['css-loader', 'less-loader',]
+    }),
 
     new MiniCssExtractPlugin({
       filename: `${prefixName}.css`,
@@ -88,9 +96,6 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.js', '.jsx', 'css', 'less', 'png', 'jpg'], // 用于webpack查找文件时自行补全文件后缀
-    alias: {
-      '@src': path.resolve(__dirname, '../src')
-    }
   },
   optimization: {
     minimizer: [],
