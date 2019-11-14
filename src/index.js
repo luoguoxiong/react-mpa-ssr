@@ -11,7 +11,7 @@ const app = new App(<Router />);
 if (module.hot) {
   let hmrKey;
   const hotClient = require("webpack-hot-middleware/client");
-  hotClient.setOptionsAndConnect({ timeout: 1000 })
+  hotClient.setOptionsAndConnect({ timeout: 1000, quiet: true })
   hotClient.subscribe(e => {
     if (e.action === "bundled") {
       if (hmrKey && hmrKey !== e.hmrKey) {

@@ -20,6 +20,8 @@ export default (app, serverCompilerDone) => {
     return serverCompilerDone.call(null, hotMiddleware)
   })
 
-  app.use(koaWebpackDevMiddleware(clientCompiler, {}))
+  app.use(koaWebpackDevMiddleware(clientCompiler, {
+    stats: 'errors-only',
+  }))
   app.use(koaWebpackHotMiddlewareObject)
 }

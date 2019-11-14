@@ -5,16 +5,22 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HappyPack = require('happypack');
 
 const ProgressBarPlugin = require('webpackbar')
-// 服务器端render,可以根据当前的manifest，引入css和js文件
+
 const ManifestPlugin = require('webpack-manifest-plugin')
 
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const { ReactLoadablePlugin } = require('react-loadable/webpack')
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const rootPath = path.join(__dirname, '../')
 
 const prefixName =
   process.env.NODE_ENV == 'production'
-    ? '[name].nodeJsp.[contenthash:8]'
+    ? '[name].[contenthash:8]'
     : '[name]'
 
 module.exports = {
@@ -30,10 +36,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  // externals: {
-  //   'react': 'React',
-  //   'react-dom': 'ReactDOM'
-  // },
+  stats: 'errors-only',
   module: {
     rules: [
       {
@@ -64,6 +67,8 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
+
     new ProgressBarPlugin({ summary: false }),
 
     new HappyPack({
@@ -92,14 +97,28 @@ module.exports = {
     // 需要Webpack告诉我们每个模块位于哪个捆绑包
     new ReactLoadablePlugin({
       filename: './build/react-loadable.json'
-    })
+    }),
+
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: ['You application is build successful~'],
+        notes: ['Some additionnal notes to be displayed unpon successful compilation']
+      }
+    }),
+
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../src/static'),
+        to: path.resolve(__dirname, '../build/static'),
+      }
+    ]),
+
   ],
   resolve: {
     extensions: ['.js', '.jsx', 'css', 'less', 'png', 'jpg'], // 用于webpack查找文件时自行补全文件后缀
   },
   optimization: {
     minimizer: [],
-
     // 代码分割处理
     splitChunks: {
       cacheGroups: {

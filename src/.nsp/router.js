@@ -2,29 +2,36 @@ import React, { Fragment } from 'react'
 import Route from '@lib/route'
 import Loadable from 'react-loadable'
 
-const Cwdetail = Loadable({
-  loader: () => import(/* webpackChunkName: 'Cwdetail' */ '../page/detail'),
+const Nsp_detail = Loadable({
+  loader: () => import(/* webpackChunkName: 'Nsp_detail' */ '../page/detail'),
   loading: () => {
     return null
   }
 })
 
-const Cwgoods = Loadable({
-  loader: () => import(/* webpackChunkName: 'Cwgoods' */ '../page/goods'),
+const Nsp_detail_other = Loadable({
+  loader: () => import(/* webpackChunkName: 'Nsp_detail_other' */ '../page/detail/other'),
   loading: () => {
     return null
   }
 })
 
-const Cw = Loadable({
-  loader: () => import(/* webpackChunkName: 'Cw' */ '../page/'),
+const Nsp_goods = Loadable({
+  loader: () => import(/* webpackChunkName: 'Nsp_goods' */ '../page/goods'),
   loading: () => {
     return null
   }
 })
 
-const Cwuser = Loadable({
-  loader: () => import(/* webpackChunkName: 'Cwuser' */ '../page/user'),
+const Nsp_ = Loadable({
+  loader: () => import(/* webpackChunkName: 'Nsp_' */ '../page/'),
+  loading: () => {
+    return null
+  }
+})
+
+const Nsp_user = Loadable({
+  loader: () => import(/* webpackChunkName: 'Nsp_user' */ '../page/user'),
   loading: () => {
     return null
   }
@@ -32,16 +39,19 @@ const Cwuser = Loadable({
 
 const routes = [{
   path: '/detail',
-  component: <Cwdetail/>
+  component: <Nsp_detail/>
+},{
+  path: '/detail/other',
+  component: <Nsp_detail_other/>
 },{
   path: '/goods',
-  component: <Cwgoods/>
+  component: <Nsp_goods/>
 },{
   path: '/',
-  component: <Cw/>
+  component: <Nsp_/>
 },{
   path: '/user',
-  component: <Cwuser/>
+  component: <Nsp_user/>
 },]
 
 class App extends React.Component {
