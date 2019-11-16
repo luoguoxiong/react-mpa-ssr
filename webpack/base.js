@@ -50,7 +50,10 @@ module.exports = {
         include: /src/,
         use: [
           MiniCssExtractPlugin.loader,
-          'happypack/loader?id=styles'
+          'happypack/loader?id=styles',
+          {
+            loader: 'postcss-loader'
+          }
         ]
       },
       {
