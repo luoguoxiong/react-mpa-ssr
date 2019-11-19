@@ -12,7 +12,8 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const { ReactLoadablePlugin } = require('react-loadable/webpack')
+const { ReactLoadablePlugin } = require('nodejsplgx/webpack')
+
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 

@@ -33,7 +33,7 @@
         "legacy": true
       }
     ],
-    "react-loadable/babel",
+    "nodejsplgx/babel",
     "@babel/plugin-transform-runtime",
     "@babel/plugin-proposal-class-properties"
   ]

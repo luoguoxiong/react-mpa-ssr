@@ -2,7 +2,8 @@ import Koa from 'koa'
 
 import config from '../config'
 
-import Loadable from 'react-loadable'
+// import Loadable from 'react-loadable'
+import Loadable from 'nodejsplgx'
 
 import R from 'ramda'
 
