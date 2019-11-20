@@ -75,10 +75,9 @@
   },
   "dependencies": {
     "@rematch/core": "^1.2.0",
-    "nodejsplgx": "^0.0.5",
+    "nodejsplgx": "^0.0.9",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2"
   }
 }

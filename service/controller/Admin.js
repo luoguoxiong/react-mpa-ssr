@@ -1,33 +1,30 @@
-import { Controller, RequestMapping, JspRender } from '../decorator'
+import { Controller, RequestMapping, JspRender } from "../decorator";
+import render from "../utils/render";
 
 @Controller
 class Admin {
-  @RequestMapping({ method: 'get', url: '/' })
-  @JspRender({ title: '首页' })
-  async home (ctx, next) {
-    await next()
-    ctx.initModel = { goods: [1, 2, 3, 5, 6] }
+  @RequestMapping({ method: "get", url: "/" })
+  async home(ctx) {
+    const initModel = { goods: [1, 2, 3, 4, 5, 6, 7] };
+    await render({ ctx, title: "首页", initModel });
   }
 
-  @RequestMapping({ method: 'get', url: '/user' })
-  @JspRender({ title: '我的页' })
-  async user (ctx, next) {
-    await next()
-    ctx.initModel = { userId: 4 }
+  @RequestMapping({ method: "get", url: "/user" })
+  async user(ctx) {
+    const initModel = { userId: 4 };
+    await render({ ctx, title: "user", initModel });
   }
 
-  @RequestMapping({ method: 'get', url: '/detail' })
-  @JspRender({ title: '详情页' })
-  async test (ctx, next) {
-    await next()
-    ctx.initModel = { user: 10 }
+  @RequestMapping({ method: "get", url: "/detail" })
+  async test(ctx) {
+    const initModel = { user: 10 };
+    await render({ ctx, title: "detail", initModel });
   }
 
-  @RequestMapping({ method: 'get', url: '/goods' })
-  @JspRender({ title: 'goods页' })
-  async goods (ctx, next) {
-    await next()
-    ctx.initModel = { info: { a: 2, b: 4 } }
+  @RequestMapping({ method: "get", url: "/goods" })
+  async goods(ctx) {
+    const initModel = { info: { a: 2, b: 4 } };
+    await render({ ctx, title: "goods", initModel });
   }
 }
-export default Admin
+export default Admin;

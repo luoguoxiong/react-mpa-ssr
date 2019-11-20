@@ -4,9 +4,7 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": [
-            "IE >= 9"
-          ]
+          "browsers": ["IE >= 9"]
         }
         // "corejs": "3",
         // "useBuiltIns": "usage"
@@ -33,7 +31,7 @@
         "legacy": true
       }
     ],
-    "nodejsplgx/babel",
+    "nodejsplgx/lib/babel",
     "@babel/plugin-transform-runtime",
     "@babel/plugin-proposal-class-properties"
   ]

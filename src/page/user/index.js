@@ -1,8 +1,8 @@
-import React from 'react'
-import connect from '@lib/connect'
+import React from "react";
+import connect from "@lib/connect";
 @connect
 export default class User extends React.Component {
-  render () {
+  render() {
     return (
       <a href="/goods">
         <div className="test">
@@ -10,6 +10,6 @@ export default class User extends React.Component {
           {JSON.stringify(this.props)}
         </div>
       </a>
-    )
+    );
   }
 }
