@@ -25,6 +25,12 @@
     "url": "https://github.com/Peroluo/NSP/issues"
   },
   "homepage": "https://github.com/Peroluo/NSP#readme",
+  "dependencies": {
+    "nodejsplgx": "^0.0.9",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-router-dom": "^5.1.2"
+  },
   "devDependencies": {
     "@babel/cli": "^7.7.0",
     "@babel/core": "^7.7.2",
@@ -72,12 +78,5 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-manifest-plugin": "^2.2.0",
     "webpackbar": "^4.0.0"
-  },
-  "dependencies": {
-    "@rematch/core": "^1.2.0",
-    "nodejsplgx": "^0.0.9",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-router-dom": "^5.1.2"
   }
 }
