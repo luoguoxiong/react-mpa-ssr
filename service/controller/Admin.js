@@ -11,7 +11,7 @@ class Admin {
 
   @RequestMapping({ method: "get", url: "/user" })
   async user(ctx) {
-    const initModel = { userId: 4 };
+    const initModel = { userId: 5 };
     await render({ ctx, title: "user", initModel });
   }
 
