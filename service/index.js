@@ -83,7 +83,7 @@ const devRun = appRun => {
     persistent: true
   });
   watcher
-    .on("all", (event, path) => {
+    .on("all", event => {
       if (watcherIsInit) {
         switch (event) {
           case "add":

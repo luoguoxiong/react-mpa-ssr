@@ -1,5 +1,5 @@
 import React from "react";
-import connect from "@lib/connect";
+import { connect } from "@lib/redux";
 import "./index.less";
 @connect
 export default class Home extends React.Component {
@@ -9,7 +9,7 @@ export default class Home extends React.Component {
         {this.props.goods.map(item => {
           return (
             <div key={item} className="test">
-              good_T1{item}
+              good_T{item}
             </div>
           );
         })}

@@ -14,8 +14,6 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const { ReactLoadablePlugin } = require("nodejsplgx/webpack");
 
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
 const nspSet = require("../.nsp.js");
 const { rootPath, loadable, manifest } = nspSet;
 const prefixName =
@@ -68,8 +66,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
-
     new ProgressBarPlugin({ summary: false }),
 
     new HappyPack({

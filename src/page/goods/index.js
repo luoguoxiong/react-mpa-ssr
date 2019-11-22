@@ -1,5 +1,5 @@
 import React from "react";
-import connect from "@lib/connect";
+import { connect } from "@lib/redux";
 @connect
 export default class Detail extends React.Component {
   state = {
