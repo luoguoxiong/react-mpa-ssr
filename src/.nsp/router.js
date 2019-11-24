@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import Route from '@lib/route'
+import { Route } from 'react-router-dom'
 import Loadable from 'nodejsplgx'
 
 const Nsp_detail = Loadable({

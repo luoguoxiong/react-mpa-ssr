@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from "@lib/redux";
-@connect
+import { setInitModel } from "@lib/inject";
+@setInitModel
 export default class Detail extends React.Component {
   state = {
     list: [1, 2, 3, 4, 5, 6]

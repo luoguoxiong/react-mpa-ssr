@@ -1,7 +1,7 @@
 import React from "react";
-import { connect } from "@lib/redux";
+import { setInitModel } from "@lib/inject";
 import "./index.less";
-@connect
+@setInitModel
 export default class Home extends React.Component {
   render() {
     return (
