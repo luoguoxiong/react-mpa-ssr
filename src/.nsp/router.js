@@ -1,36 +1,41 @@
-import React, { Fragment } from 'react'
-import { Route } from 'react-router-dom'
-import Loadable from 'nodejsplgx'
+import React, { Fragment } from "react";
+import { Route } from "react-router-dom";
+import Loadable from "nodejsplgx";
 
 const Nsp_detail = Loadable({
-  loader: () => import(/* webpackChunkName: 'Nsp_detail' */ '../page/detail'),
-})
+  loader: () => import(/* webpackChunkName: 'Nsp_detail' */ '../page/detail')
+});
 
 const Nsp_goods = Loadable({
-  loader: () => import(/* webpackChunkName: 'Nsp_goods' */ '../page/goods'),
-})
+  loader: () => import(/* webpackChunkName: 'Nsp_goods' */ '../page/goods')
+});
 
 const Nsp_ = Loadable({
-  loader: () => import(/* webpackChunkName: 'Nsp_' */ '../page/'),
-})
+  loader: () => import(/* webpackChunkName: 'Nsp_' */ '../page/')
+});
 
 const Nsp_user = Loadable({
-  loader: () => import(/* webpackChunkName: 'Nsp_user' */ '../page/user'),
-})
+  loader: () => import(/* webpackChunkName: 'Nsp_user' */ '../page/user')
+});
 
-const routes = [{
-  path: '/detail',
-  component: <Nsp_detail/>
-},{
-  path: '/goods',
-  component: <Nsp_goods/>
-},{
-  path: '/',
-  component: <Nsp_/>
-},{
-  path: '/user',
-  component: <Nsp_user/>
-},]
+const routes = [
+  {
+    path: "/detail",
+    component: <Nsp_detail />
+  },
+  {
+    path: "/goods",
+    component: <Nsp_goods />
+  },
+  {
+    path: "/",
+    component: <Nsp_ />
+  },
+  {
+    path: "/user",
+    component: <Nsp_user />
+  },
+]
 
 class App extends React.Component {
   render () {
@@ -42,7 +47,8 @@ class App extends React.Component {
           </Route>
         ))}
       </Fragment>
-    )
+    );
   }
 }
-export default App
+
+export default App;

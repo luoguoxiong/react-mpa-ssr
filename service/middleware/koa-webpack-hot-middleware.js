@@ -17,7 +17,7 @@ export default (complimer, options) => {
       res.end = () => {};
       return hotMiddleware(ctx.req, res, next);
     } catch (e) {
-      throw e;
+      // throw e;
     }
   };
   koaWebpackHotMiddleware.hotMiddleware = hotMiddleware;

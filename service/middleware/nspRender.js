@@ -1,14 +1,10 @@
-import { renderForServer } from "@lib";
-// import nspSet from "../../.nsp.js";
-// const json = require(nspSet.loadable);
-import json from "../../build/loadable.json";
+import Server from "@lib/server";
 const ssrJspRender = ({ title = "app" }) => {
   return async (ctx, next) => {
     await next();
-    let { htmlString, scripts, styles } = renderForServer(
+    let { htmlString, scripts, styles } = new Server().getSsrString(
       ctx.path,
-      ctx.initModel,
-      json
+      ctx.initModel
     );
     await ctx.render("index", {
       title,

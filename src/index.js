@@ -4,8 +4,6 @@ import React from "react";
 
 import { Client } from "@lib/client";
 
-import Router from "@src/.nsp/router";
+import App from "@src/.nsp/router";
 
-const app = new Client((<Router />));
-
-app.render();
+new Client((<App />)).render();

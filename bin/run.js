@@ -1,4 +1,4 @@
-import RouterAnalyze from "@lib/routerAnalyze";
+import RouterAnalyze from "@lib/analyze";
 
 import { resolve } from "path";
 

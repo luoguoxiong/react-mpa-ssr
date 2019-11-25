@@ -14,8 +14,12 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const { ReactLoadablePlugin } = require("nodejsplgx/webpack");
 
-const nspSet = require("../.nsp.js");
-const { rootPath, loadable, manifest } = nspSet;
+const rootPath = path.resolve(__dirname, "../");
+
+const loadable = path.join(rootPath, "/build/loadable.json");
+
+const manifest = path.join(rootPath, "/build/manifest.json");
+
 const prefixName =
   process.env.NODE_ENV == "production" ? "[name].[contenthash:8]" : "[name]";
 
@@ -24,7 +28,7 @@ module.exports = {
     assets: ["./src/index.js"]
   },
   output: {
-    filename: `${prefixName}.js`,
+    filename: `Nsp_${prefixName}.js`,
     path: path.resolve(rootPath, "./build"),
     publicPath: "/",
     chunkFilename: `${prefixName}.js`
@@ -117,15 +121,6 @@ module.exports = {
     extensions: [".js", ".jsx", "css", "less", "png", "jpg"]
   },
   optimization: {
-    minimizer: [],
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          name: "vendor",
-          test: /[\\/]node_modules[\\/]/,
-          chunks: "all"
-        }
-      }
-    }
+    minimizer: []
   }
 };

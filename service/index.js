@@ -14,7 +14,7 @@ import chalk from "chalk";
 
 import chokidar from "chokidar";
 
-import RouterAnalyze from "@lib/routerAnalyze";
+import RouterAnalyze from "@lib/analyze";
 const { port, env } = (global.config = config);
 
 const app = new Koa();
@@ -47,7 +47,7 @@ const useMiddlewares = app => {
       app.listen(port, err => {
         console.log(
           chalk.green(
-            `NODEJSP is Listening on port ${port}. Open up http://localhost:${port}/ in your browser.\n`
+            `Nsp is Listening on port ${port}. Open up http://localhost:${port}/ in your browser.\n`
           )
         );
       });
