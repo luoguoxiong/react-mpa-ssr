@@ -9,7 +9,7 @@ export default class Home extends React.Component {
         {this.props.goods.map(item => {
           return (
             <div key={item} className="test">
-              good_T{item}
+              good_{item}
             </div>
           );
         })}

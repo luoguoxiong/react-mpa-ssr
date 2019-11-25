@@ -1,19 +1,17 @@
-const webpack = require('webpack')
+const webpack = require("webpack");
 
-const { cloneDeep } = require('lodash')
+const { cloneDeep } = require("lodash");
 
-const baseConfig = require('./base')
+const baseConfig = require("./base");
 
-const devConfig = cloneDeep(baseConfig)
+const devConfig = cloneDeep(baseConfig);
 
 devConfig.entry.assets.push(
-  'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=0&reload=true&quiet=true'
-)
+  "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=0&reload=true&quiet=true"
+);
 
-devConfig.mode = 'development'
+devConfig.mode = "development";
 
-devConfig.plugins.push(
-  new webpack.HotModuleReplacementPlugin(),
-)
+devConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
-module.exports = devConfig
+module.exports = devConfig;

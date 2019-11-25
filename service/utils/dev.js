@@ -1,27 +1,37 @@
-import webpack from 'webpack'
+import webpack from "webpack";
 
-import koaWebpackDevMiddleware from '../middleware/koa-webpack-dev-middleware'
+import koaWebpackDevMiddleware from "../middleware/koa-webpack-dev-middleware";
 
-import koaWebpackHotMiddleware from '../middleware/koa-webpack-hot-middleware'
+import koaWebpackHotMiddleware from "../middleware/koa-webpack-hot-middleware";
 
-const webpackClientConfig = require('../../webpack/webpack.config.dev')
+const webpackClientConfig = require("../../webpack/webpack.config.dev");
 
-export default (app, serverCompilerDone) => {
-  const clientCompiler = webpack(webpackClientConfig)
+export default (app, callback) => {
+  let hmrKeyT = null;
 
-  const koaWebpackHotMiddlewareObject = koaWebpackHotMiddleware(
-    clientCompiler,
-    {
-      heartbeat: 500
+  const clientCompiler = webpack(webpackClientConfig);
+
+  const koaWebpackHotMiddlewareObject = koaWebpackHotMiddleware(clientCompiler);
+
+  let hotMiddleware = koaWebpackHotMiddlewareObject.hotMiddleware;
+  clientCompiler.plugin("done", () => {
+    if (hotMiddleware && typeof hotMiddleware.publish === "function") {
+      if (hmrKeyT) global.clearInterval(hmrKeyT);
+      const hmrKey = new Date().getSeconds();
+      hmrKeyT = global.setInterval(() => {
+        hotMiddleware.publish({
+          action: "bundled",
+          hmrKey
+        });
+      }, 1000);
+      callback();
     }
-  )
-  let hotMiddleware = koaWebpackHotMiddlewareObject.hotMiddleware
-  clientCompiler.plugin('done', () => {
-    return serverCompilerDone.call(null, hotMiddleware)
-  })
+  });
 
-  app.use(koaWebpackDevMiddleware(clientCompiler, {
-    stats: 'errors-only',
-  }))
-  app.use(koaWebpackHotMiddlewareObject)
-}
+  app.use(
+    koaWebpackDevMiddleware(clientCompiler, {
+      stats: "errors-only"
+    })
+  );
+  app.use(koaWebpackHotMiddlewareObject);
+};

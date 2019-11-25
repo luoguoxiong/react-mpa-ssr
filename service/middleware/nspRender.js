@@ -1,5 +1,5 @@
 import Server from "@lib/server";
-const ssrJspRender = ({ title = "app" }) => {
+const nspRender = ({ title = "app" }) => {
   return async (ctx, next) => {
     await next();
     let { htmlString, scripts, styles } = new Server().getSsrString(
@@ -15,4 +15,4 @@ const ssrJspRender = ({ title = "app" }) => {
     });
   };
 };
-export default ssrJspRender;
+export default nspRender;
