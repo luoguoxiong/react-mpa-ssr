@@ -21,7 +21,8 @@
           "@lib": "./lib",
           "@build": "./build",
           "@service": "./service",
-          "@config": "./config"
+          "@config": "./config",
+          "@nsp": "./nsp"
         }
       }
     ],
@@ -31,7 +32,7 @@
         "legacy": true
       }
     ],
-    "nodejsplgx/lib/babel",
+    "./nsp/babel",
     "@babel/plugin-transform-runtime",
     "@babel/plugin-proposal-class-properties"
   ]

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Route } from "react-router-dom";
-import Loadable from "nodejsplgx";
+import Loadable from "@nsp";
 
 const Nsp_detail = Loadable({
   loader: () => import(/* webpackChunkName: 'Nsp_detail' */ '../page/detail')

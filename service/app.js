@@ -1,5 +1,5 @@
 import Koa from "koa";
-import Loadable from "nodejsplgx";
+import Loadable from "@nsp";
 import R from "ramda";
 import { join, resolve } from "path";
 import chalk from "chalk";

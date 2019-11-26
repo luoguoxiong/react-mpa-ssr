@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "nsp是koa+react服务端渲染框架",
   "scripts": {
+    "load": "babel --watch nsp/loadbal  -d  nsp",
     "dev": "cross-env NODE_ENV=development nodemon node bin/index.js",
     "build": "run-s build:webpack build:start",
     "build:start": "cross-env NODE_ENV=production node bin/index.js",
@@ -24,7 +25,6 @@
   },
   "homepage": "https://github.com/Peroluo/NSP#readme",
   "dependencies": {
-    "nodejsplgx": "0.1.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2"
