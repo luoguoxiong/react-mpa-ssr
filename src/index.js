@@ -1,5 +1,4 @@
 import "react-app-polyfill/ie9";
-
 import React from "react";
 
 import { Client } from "@lib/client";

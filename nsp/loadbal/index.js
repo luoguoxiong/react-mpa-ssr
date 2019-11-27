@@ -1,14 +1,12 @@
 const React = require("react");
-const PropTypes = require("prop-types");
 
 const ALL_INITIALIZERS = [];
 const READY_INITIALIZERS = [];
-
+const LoadableContext = React.createContext();
 function isWebpackReady(getModuleIds) {
   if (typeof __webpack_modules__ !== "object") {
     return false;
   }
-
   return getModuleIds().every(moduleId => {
     return (
       typeof moduleId !== "undefined" &&
@@ -30,7 +28,6 @@ function load(loader) {
     .catch(err => {
       throw err;
     });
-
   return state;
 }
 
@@ -38,19 +35,8 @@ function resolve(obj) {
   return obj && obj.__esModule ? obj.default : obj;
 }
 
-function render(loaded, props) {
-  return React.createElement(resolve(loaded), props);
-}
-
 function createLoadableComponent(loadFn, options) {
-  let opts = Object.assign(
-    {
-      loader: null,
-      webpack: null,
-      modules: null
-    },
-    options
-  );
+  let opts = options;
 
   let res = null;
   function init() {
@@ -61,7 +47,6 @@ function createLoadableComponent(loadFn, options) {
   }
 
   ALL_INITIALIZERS.push(init);
-
   if (typeof opts.webpack === "function") {
     READY_INITIALIZERS.push(() => {
       if (isWebpackReady(opts.webpack)) {
@@ -70,32 +55,23 @@ function createLoadableComponent(loadFn, options) {
     });
   }
   return class LoadableComponent extends React.Component {
-    constructor(props) {
+    constructor(props, context) {
       super(props);
       init();
       this.state = {
         loaded: res.loaded
       };
     }
-
-    static contextTypes = {
-      loadable: PropTypes.shape({
-        report: PropTypes.func.isRequired
-      })
-    };
-
-    static preload() {
-      return init();
-    }
+    static contextType = LoadableContext;
 
     UNSAFE_componentWillMount() {
       this._loadModule();
     }
 
     _loadModule() {
-      if (this.context.loadable && Array.isArray(opts.modules)) {
+      if (this.context && Array.isArray(opts.modules)) {
         opts.modules.forEach(moduleName => {
-          this.context.loadable.report(moduleName);
+          this.context(moduleName);
         });
       }
     }
@@ -115,26 +91,12 @@ function Loadable(opts) {
 }
 
 class Capture extends React.Component {
-  static propTypes = {
-    report: PropTypes.func.isRequired
-  };
-
-  static childContextTypes = {
-    loadable: PropTypes.shape({
-      report: PropTypes.func.isRequired
-    }).isRequired
-  };
-
-  getChildContext() {
-    return {
-      loadable: {
-        report: this.props.report
-      }
-    };
-  }
-
   render() {
-    return React.Children.only(this.props.children);
+    return (
+      <LoadableContext.Provider value={this.props.report}>
+        {React.Children.only(this.props.children)}
+      </LoadableContext.Provider>
+    );
   }
 }
 

@@ -4,7 +4,6 @@ const { port, env } = config;
 global.config = config;
 let middlewares = ["bodyParser", "views", "staticCache", "router"];
 const Server = new App(middlewares, port);
-console.log(env);
 if (env === "development") {
   Server.runDev();
 } else {

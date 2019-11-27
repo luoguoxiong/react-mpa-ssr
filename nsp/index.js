@@ -18,10 +18,9 @@ var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var React = require("react");
 
-var PropTypes = require("prop-types");
-
 var ALL_INITIALIZERS = [];
 var READY_INITIALIZERS = [];
+var LoadableContext = React.createContext();
 
 function isWebpackReady(getModuleIds) {
   if ((typeof __webpack_modules__ === "undefined" ? "undefined" : (0, _typeof2.default)(__webpack_modules__)) !== "object") {
@@ -51,18 +50,10 @@ function resolve(obj) {
   return obj && obj.__esModule ? obj.default : obj;
 }
 
-function render(loaded, props) {
-  return React.createElement(resolve(loaded), props);
-}
-
 function createLoadableComponent(loadFn, options) {
   var _class, _temp;
 
-  var opts = Object.assign({
-    loader: null,
-    webpack: null,
-    modules: null
-  }, options);
+  var opts = options;
   var res = null;
 
   function init() {
@@ -88,7 +79,7 @@ function createLoadableComponent(loadFn, options) {
   function (_React$Component) {
     (0, _inherits2.default)(LoadableComponent, _React$Component);
 
-    function LoadableComponent(props) {
+    function LoadableComponent(props, context) {
       var _this;
 
       (0, _classCallCheck2.default)(this, LoadableComponent);
@@ -110,9 +101,9 @@ function createLoadableComponent(loadFn, options) {
       value: function _loadModule() {
         var _this2 = this;
 
-        if (this.context.loadable && Array.isArray(opts.modules)) {
+        if (this.context && Array.isArray(opts.modules)) {
           opts.modules.forEach(function (moduleName) {
-            _this2.context.loadable.report(moduleName);
+            _this2.context(moduleName);
           });
         }
       }
@@ -125,18 +116,9 @@ function createLoadableComponent(loadFn, options) {
           return null;
         }
       }
-    }], [{
-      key: "preload",
-      value: function preload() {
-        return init();
-      }
     }]);
     return LoadableComponent;
-  }(React.Component), (0, _defineProperty2.default)(_class, "contextTypes", {
-    loadable: PropTypes.shape({
-      report: PropTypes.func.isRequired
-    })
-  }), _temp;
+  }(React.Component), (0, _defineProperty2.default)(_class, "contextType", LoadableContext), _temp;
 }
 
 function Loadable(opts) {
@@ -154,31 +136,16 @@ function (_React$Component2) {
   }
 
   (0, _createClass2.default)(Capture, [{
-    key: "getChildContext",
-    value: function getChildContext() {
-      return {
-        loadable: {
-          report: this.props.report
-        }
-      };
-    }
-  }, {
     key: "render",
     value: function render() {
-      return React.Children.only(this.props.children);
+      return React.createElement(LoadableContext.Provider, {
+        value: this.props.report
+      }, React.Children.only(this.props.children));
     }
   }]);
   return Capture;
 }(React.Component);
 
-(0, _defineProperty2.default)(Capture, "propTypes", {
-  report: PropTypes.func.isRequired
-});
-(0, _defineProperty2.default)(Capture, "childContextTypes", {
-  loadable: PropTypes.shape({
-    report: PropTypes.func.isRequired
-  }).isRequired
-});
 Loadable.Capture = Capture;
 
 function flushInitializers(initializers) {

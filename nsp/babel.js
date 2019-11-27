@@ -12,8 +12,7 @@ function _default(_ref) {
     visitor: {
       ImportDeclaration: function ImportDeclaration(path) {
         var source = path.node.source.value;
-        if (!source.includes("nsp")) return;
-        console.log(source);
+        if (!source.includes("../../nsp") || source.includes("webpack")) return;
         var defaultSpecifier = path.get("specifiers").find(function (specifier) {
           return specifier.isImportDefaultSpecifier();
         });

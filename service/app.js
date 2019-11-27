@@ -8,6 +8,8 @@ import RouterAnalyze from "@lib/analyze";
 import dev from "./utils/dev";
 const entry = resolve(__dirname, "../src/page");
 const output = resolve(__dirname, "../src/.nsp/router.js");
+import webpack from "webpack";
+import webpackConfig from "../webpack/webpack.config.prod";
 class App {
   // wather是否初始化
   constructor(middlewares, port) {
@@ -79,8 +81,10 @@ class App {
 
   runPro() {
     new RouterAnalyze(entry, output, () => {
-      this.useMiddleware();
-      this.createHttpServer();
+      webpack(webpackConfig, () => {
+        this.useMiddleware();
+        this.createHttpServer();
+      });
     });
   }
 }

@@ -5,9 +5,7 @@
   "scripts": {
     "load": "babel --watch nsp/loadbal  -d  nsp",
     "dev": "cross-env NODE_ENV=development nodemon node bin/index.js",
-    "build": "run-s build:webpack build:start",
-    "build:start": "cross-env NODE_ENV=production node bin/index.js",
-    "build:webpack": "webpack --config  webpack/webpack.config.prod.js",
+    "build": "cross-env NODE_ENV=production node bin/index.js",
     "analyze": "cross-env Analyze=true webpack --config  webpack/webpack.config.prod.js"
   },
   "repository": {

@@ -3,8 +3,7 @@ export default function({ types: t, template }) {
     visitor: {
       ImportDeclaration(path) {
         let source = path.node.source.value;
-        if (!source.includes("nsp")) return;
-        console.log(source);
+        if (!source.includes("../../nsp") || source.includes("webpack")) return;
         let defaultSpecifier = path.get("specifiers").find(specifier => {
           return specifier.isImportDefaultSpecifier();
         });

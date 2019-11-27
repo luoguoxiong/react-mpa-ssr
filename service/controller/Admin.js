@@ -4,7 +4,7 @@ class Admin {
   @RequestMapping({ method: "get", url: "/" })
   @NspRender({ title: "首页" })
   async home(ctx) {
-    ctx.initModel = { goods: [1, 2, 3, 4, 5, 6] };
+    ctx.initModel = { goods: [1, 2, 3, 4, 5, 6, 7, 8] };
   }
 
   @RequestMapping({ method: "get", url: "/user" })
