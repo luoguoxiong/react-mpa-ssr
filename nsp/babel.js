@@ -6,8 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = _default;
 
 function _default(_ref) {
-  var t = _ref.types,
-      template = _ref.template;
+  var t = _ref.types;
   return {
     visitor: {
       ImportDeclaration: function ImportDeclaration(path) {

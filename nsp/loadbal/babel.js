@@ -1,4 +1,4 @@
-export default function({ types: t, template }) {
+export default function({ types: t }) {
   return {
     visitor: {
       ImportDeclaration(path) {
