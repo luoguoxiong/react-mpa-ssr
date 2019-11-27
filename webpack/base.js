@@ -12,8 +12,6 @@ const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const MyPlugin = require("./myPlugin");
-
 const { ReactLoadablePlugin } = require("../nsp/webpack");
 
 const rootPath = path.resolve(__dirname, "../");
@@ -70,7 +68,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new MyPlugin(),
     new ProgressBarPlugin({ summary: false }),
 
     new HappyPack({
