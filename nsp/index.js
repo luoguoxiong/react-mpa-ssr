@@ -32,25 +32,11 @@ function isWebpackReady(getModuleIds) {
   });
 }
 
-function load(loader) {
-  var promise = loader();
-  var state = {
-    loaded: null
-  };
-  state.promise = promise.then(function (loaded) {
-    state.loaded = loaded;
-    return loaded;
-  }).catch(function (err) {
-    throw err;
-  });
-  return state;
-}
-
 function resolve(obj) {
   return obj && obj.__esModule ? obj.default : obj;
 }
 
-function createLoadableComponent(loadFn, options) {
+function createLoadableComponent(options) {
   var _class, _temp;
 
   var opts = options;
@@ -58,7 +44,16 @@ function createLoadableComponent(loadFn, options) {
 
   function init() {
     if (!res) {
-      res = loadFn(opts.loader);
+      var state = {
+        loaded: null
+      };
+      state.promise = opts.loader().then(function (loaded) {
+        state.loaded = loaded;
+        return loaded;
+      }).catch(function (err) {
+        throw err;
+      });
+      res = state;
     }
 
     return res.promise;
@@ -122,7 +117,7 @@ function createLoadableComponent(loadFn, options) {
 }
 
 function Loadable(opts) {
-  return createLoadableComponent(load, opts);
+  return createLoadableComponent(opts);
 }
 
 var Capture =
@@ -161,17 +156,19 @@ function flushInitializers(initializers) {
       return flushInitializers(initializers);
     }
   });
-}
+} // 服务端
+
 
 Loadable.preloadAll = function () {
   return new Promise(function (resolve, reject) {
     flushInitializers(ALL_INITIALIZERS).then(resolve, reject);
   });
-};
+}; // 客户端
+
 
 Loadable.preloadReady = function () {
   return new Promise(function (resolve, reject) {
-    flushInitializers(READY_INITIALIZERS).then(resolve, resolve);
+    flushInitializers(READY_INITIALIZERS).then(resolve, reject);
   });
 };
 

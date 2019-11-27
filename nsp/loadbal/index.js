@@ -15,33 +15,29 @@ function isWebpackReady(getModuleIds) {
   });
 }
 
-function load(loader) {
-  let promise = loader();
-  let state = {
-    loaded: null
-  };
-  state.promise = promise
-    .then(loaded => {
-      state.loaded = loaded;
-      return loaded;
-    })
-    .catch(err => {
-      throw err;
-    });
-  return state;
-}
-
 function resolve(obj) {
   return obj && obj.__esModule ? obj.default : obj;
 }
 
-function createLoadableComponent(loadFn, options) {
+function createLoadableComponent(options) {
   let opts = options;
 
   let res = null;
   function init() {
     if (!res) {
-      res = loadFn(opts.loader);
+      let state = {
+        loaded: null
+      };
+      state.promise = opts
+        .loader()
+        .then(loaded => {
+          state.loaded = loaded;
+          return loaded;
+        })
+        .catch(err => {
+          throw err;
+        });
+      res = state;
     }
     return res.promise;
   }
@@ -87,7 +83,7 @@ function createLoadableComponent(loadFn, options) {
 }
 
 function Loadable(opts) {
-  return createLoadableComponent(load, opts);
+  return createLoadableComponent(opts);
 }
 
 class Capture extends React.Component {
@@ -116,16 +112,17 @@ function flushInitializers(initializers) {
     }
   });
 }
-
+// 服务端
 Loadable.preloadAll = () => {
   return new Promise((resolve, reject) => {
     flushInitializers(ALL_INITIALIZERS).then(resolve, reject);
   });
 };
 
+// 客户端
 Loadable.preloadReady = () => {
   return new Promise((resolve, reject) => {
-    flushInitializers(READY_INITIALIZERS).then(resolve, resolve);
+    flushInitializers(READY_INITIALIZERS).then(resolve, reject);
   });
 };
 module.exports = Loadable;

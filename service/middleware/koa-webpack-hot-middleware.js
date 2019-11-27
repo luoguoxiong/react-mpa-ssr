@@ -8,6 +8,9 @@ export default complimer => {
   });
   const koaWebpackHotMiddleware = (ctx, next) => {
     ctx.body = new stream.PassThrough();
+    // ctx.body = someHTTPStream
+    //   .on("error", ctx.onerror)
+    //   .pipe(new stream.PassThrough());
     return hotMiddleware(ctx.req, ctx.res, next);
   };
   koaWebpackHotMiddleware.hotMiddleware = hotMiddleware;
