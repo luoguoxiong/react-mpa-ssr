@@ -11,7 +11,6 @@ const output = resolve(__dirname, "../src/.nsp/router.js");
 import webpack from "webpack";
 import webpackConfig from "../webpack/webpack.config.prod";
 class App {
-  // wather是否初始化
   constructor(middlewares, port) {
     this.app = new Koa();
     this.isListen = false;
@@ -21,7 +20,7 @@ class App {
 
   useMiddleware() {
     const joinPathName = moduleName =>
-      join(__dirname, `./middleware/${moduleName}`);
+      join(__dirname, `./middleware_app/${moduleName}`);
 
     const requirePath = pathName => require(pathName);
 
