@@ -1,19 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { setInitModel } from "@lib/inject";
 import "./index.less";
 @setInitModel
 export default class Home extends React.Component {
   render() {
-    return (
-      <a href="/user">
-        {this.props.goods.map(item => {
-          return (
-            <div key={item} className="test">
-              good_T{item}
-            </div>
-          );
-        })}
-      </a>
-    );
+    return <div>11</div>;
   }
 }
