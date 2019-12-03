@@ -5,10 +5,13 @@ export default class Tab extends React.PureComponent {
     list: [
       { icon: "iconfont icon-caidaniconshouyehui", name: "首页", url: "/" },
       { icon: "iconfont icon-clone", name: "专题", url: "/topic" },
-      { icon: "iconfont icon-sort", name: "分类", url: "/catelog" },
-      { icon: "iconfont icon-cart", name: "购物车", url: "/cart" },
-      { icon: "iconfont icon-mine", name: "我的", url: "/mine" }
+      { icon: "iconfont icon-sort", name: "分类", url: "/" },
+      { icon: "iconfont icon-cart", name: "购物车", url: "/" },
+      { icon: "iconfont icon-mine", name: "我的", url: "/" }
     ]
+  };
+  linkto = item => {
+    window.location.href = item.url;
   };
   render() {
     const { list } = this.state;
@@ -21,9 +24,7 @@ export default class Tab extends React.PureComponent {
               key={index}
               className={index === active ? "active" : ""}
               onClick={() => {
-                this.props.onChange &&
-                  index !== active &&
-                  this.props.onChange(item);
+                index !== active && this.linkto(item);
               }}
             >
               <div className="tabIcon">

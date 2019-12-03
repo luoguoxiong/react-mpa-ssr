@@ -15,9 +15,12 @@ class View {
   }
 
   @RequestMapping({ method: "get", url: "/topic" })
-  @NspRender({ title: "topic" })
+  @NspRender({ title: "NSP精选专题" })
   async topic(ctx) {
-    const data = await Axios.httpRequest("/topic/list?page=1&size=6");
+    const data = await Axios.httpRequest("/topic/list", {
+      page: 1,
+      size: 6
+    });
     ctx.initModel = { ...data };
   }
 }
