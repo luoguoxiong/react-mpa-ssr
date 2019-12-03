@@ -1,6 +1,6 @@
 #topicPage {
   .topicItem {
-    margin-bottom: 20px;
+    margin-top: 20px;
     height: 550px;
     padding-bottom: 20px;
     box-shadow: 0 0 20px 0 rgba(128, 145, 165, 0.2);
@@ -32,5 +32,16 @@
       font-size: 28px;
       color: red;
     }
+  }
+  & > .topicItem:nth-child(1) {
+    margin-top: 0;
+  }
+  .noHasAny {
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 30px;
+    color: gray;
+    background: white;
   }
 }
