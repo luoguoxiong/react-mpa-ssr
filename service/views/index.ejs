@@ -7,13 +7,20 @@
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no"
     />
+    <meta name="theme-color" content="#000000" />
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
     <title><%= title %></title>
-    <%- styles %>
     <link
       href="https://cdn.bootcss.com/antd-mobile/2.3.1/antd-mobile.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/static/reset.css" />
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_1031555_f973aq5rr7g.css"
+    />
+    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+    <%- styles %>
   </head>
   <script>
     window.__initModel__ =<%- JSON.stringify(initModel) %>

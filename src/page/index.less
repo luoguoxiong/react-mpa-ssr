@@ -1,6 +1,148 @@
-@import "./var";
-.test {
-  transform: translateX(40px);
-  color: @color;
-  font-size: 15px;
+#homePage {
+  .bannerWrap {
+    height: 400px;
+    background: url(https://s1.hdslb.com/bfs/static/jinkela/international-home/asserts/bgm-nodata.png);
+    background-size: 100% 100%;
+    .banner {
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .channel {
+    height: 90px;
+    background: white;
+    padding-top: 20px;
+    display: flex;
+    li {
+      flex: 1;
+      height: 100%;
+      img {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        display: block;
+      }
+      span {
+        height: 40px;
+        display: block;
+        text-align: center;
+        line-height: 40px;
+        font-size: 24px;
+      }
+    }
+  }
+  .wrapper {
+    margin-top: 20px;
+    .title {
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      background: white;
+      letter-spacing: 2px;
+      font-weight: 700;
+      font-size: 30px;
+    }
+    .brandContent {
+      display: flex;
+      flex-wrap: wrap;
+      background: white;
+      div {
+        width: 50%;
+        height: 200px;
+        position: relative;
+        span.brandName {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          font-size: 20px;
+          z-index: 2;
+        }
+        span.brandMoney {
+          position: absolute;
+          top: 50px;
+          left: 20px;
+          font-size: 20px;
+          color: gray;
+          z-index: 2;
+        }
+        img {
+          position: relative;
+          width: 100%;
+          height: 200px;
+        }
+      }
+    }
+    .newsContent {
+      display: flex;
+      flex-wrap: wrap;
+      background: white;
+      padding: 0 20px;
+      & > div {
+        width: 50%;
+        position: relative;
+        padding: 0 20px;
+        box-sizing: border-box;
+        img {
+          width: 315px;
+          height: 315px;
+        }
+        div {
+          text-align: center;
+          font-size: 26px;
+        }
+        .newsName {
+          color: #333;
+        }
+        .newsPrice {
+          height: 60px;
+          line-height: 60px;
+          color: red;
+          font-size: 30px;
+        }
+      }
+    }
+    .hotsContent {
+      padding: 0 20px;
+      background: white;
+      li {
+        height: 240px;
+        display: flex;
+        .left {
+          width: 200px;
+          height: 200px;
+          padding: 20px 20px 20px 0;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .right {
+          flex: 1;
+          height: 200px;
+          padding: 20px 0;
+          div {
+            height: 33.333%;
+            display: flex;
+            align-items: center;
+          }
+          div:nth-child(1) {
+            font-size: 30px;
+          }
+          div:nth-child(2) {
+            color: darkgray;
+            font-size: 28px;
+          }
+          div:nth-child(3) {
+            color: red;
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
 }
