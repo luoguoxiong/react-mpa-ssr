@@ -16,7 +16,6 @@ class App {
     this.isListen = false;
     this.middlewares = middlewares;
     this.port = port;
-    this.useMiddleware();
   }
 
   useMiddleware() {
@@ -34,6 +33,7 @@ class App {
   }
 
   createHttpServer() {
+    this.useMiddleware();
     Loadable.preloadAll().then(() => {
       this.app.listen(this.port, err => {
         console.log(

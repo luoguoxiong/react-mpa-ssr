@@ -14,7 +14,7 @@ npm run dev
 npm run build
 ```
 
-## 文件夹目录
+## Directory
 
 ```npm
 nsp
@@ -42,3 +42,55 @@ nsp
 └─ pm2.json                              pm2启动文件
 ```
 
+## Helloword
+
+#### 1.src/page/index.js
+
+```js
+import React from "react";
+import { setInitModel } from "@lib/inject";
+@setInitModel
+export default class Helloword extends React.Component {
+  render() {
+    return <div>{JSON.stringify(this.props)}</div>;
+  }
+}
+```
+
+#### 2. service/controller/home.js
+
+```js
+import { Controller, RequestMapping, NspRender } from "../decorator";
+import AxiosHttp from "../utils/Http";
+const Axios = new AxiosHttp({
+  timeout: 10000,
+  baseURL: "http://202.96.155.121:8888/api"
+});
+@Controller
+class Home {
+  @RequestMapping({ method: "get", url: "/other" })
+  @NspRender({ title: "helloword" })
+  async other(ctx) {
+    const data = await Axios.httpRequest("/topic/list", {
+      page: 1,
+      size: 6
+    });
+    ctx.initModel = { ...data };
+  }
+}
+export default Home;
+```
+
+## 已完成的东西
+
+> 1. src/page文件自动生成客服端路由文件
+> 2. 封装服务端日志
+> 3. 放弃redux,简单使用context注入数据
+> 4. 热更新
+> 5. 按需加载
+
+## End
+
+> 最近工作的一年时间里，基本都是在玩React同构相关的东西，从公司自己的React（注水）框架，到后来放弃使用,转用Next.js。发现里面很多有趣的东西，才有了我的nsp。哈哈~发现跟jsp有相似点，就顺便调戏下自己刚出来时写过的jsp去吗Nsp。
+
+### 喜欢的朋友，顺手帮忙点个赞吧~万分感谢！
