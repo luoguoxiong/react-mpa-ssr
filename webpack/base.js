@@ -50,7 +50,8 @@ module.exports = {
         include: /src/,
         use: [
           MiniCssExtractPlugin.loader,
-          "happypack/loader?id=styles",
+          "css-loader",
+          "less-loader",
           "postcss-loader"
         ]
       },
@@ -74,12 +75,6 @@ module.exports = {
       id: "js",
       threads: 5,
       loaders: ["babel-loader?cacheDirectory=true"]
-    }),
-
-    new HappyPack({
-      id: "styles",
-      threads: 3,
-      loaders: ["css-loader", "less-loader"]
     }),
 
     new MiniCssExtractPlugin({

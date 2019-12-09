@@ -16,6 +16,7 @@ class App {
     this.isListen = false;
     this.middlewares = middlewares;
     this.port = port;
+    this.useMiddleware();
   }
 
   useMiddleware() {
@@ -49,7 +50,6 @@ class App {
     new RouterAnalyze(entry, output, () => {
       if (!this.isListen) {
         dev(this.app, () => {
-          this.useMiddleware();
           !this.isListen && this.createHttpServer();
         });
       }
@@ -81,7 +81,6 @@ class App {
   runPro() {
     new RouterAnalyze(entry, output, () => {
       webpack(webpackConfig, () => {
-        this.useMiddleware();
         this.createHttpServer();
       });
     });

@@ -11,7 +11,7 @@ export default class Tab extends React.PureComponent {
     ]
   };
   linkto = item => {
-    window.location.href = item.url;
+    window.location.replace(item.url);
   };
   render() {
     const { list } = this.state;
