@@ -3,14 +3,14 @@ import { setInitModel } from "@lib/inject";
 import { Tab } from "@src/components";
 
 @setInitModel
-class Sort extends React.Component {
+class Mine extends React.Component {
   render() {
     return (
       <div id="content">
-        分类页
-        <Tab active={2}></Tab>
+        我的页
+        <Tab active={4}></Tab>
       </div>
     );
   }
 }
-export default Sort;
+export default Mine;

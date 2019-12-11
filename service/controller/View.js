@@ -26,12 +26,20 @@ class View {
 
   @RequestMapping({ method: "get", url: "/sort" })
   @NspRender({ title: "NSP分类" })
-  async topic(ctx) {
-    const data = await Axios.httpRequest("/topic/list", {
-      page: 1,
-      size: 6
-    });
-    ctx.initModel = { ...data };
+  async sort(ctx) {
+    ctx.initModel = {};
+  }
+
+  @RequestMapping({ method: "get", url: "/cart" })
+  @NspRender({ title: "NSP购物车" })
+  async cart(ctx) {
+    ctx.initModel = {};
+  }
+
+  @RequestMapping({ method: "get", url: "/mine" })
+  @NspRender({ title: "NSP用户" })
+  async mine(ctx) {
+    ctx.initModel = {};
   }
 }
 export default View;
