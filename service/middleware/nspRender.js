@@ -7,7 +7,7 @@ const nspRender = ({ title = "app" }) => {
       ctx.initModel
     );
     await ctx.render("index", {
-      title,
+      title: ctx.title ? ctx.title : title,
       scripts,
       styles,
       initModel: ctx.initModel || {},

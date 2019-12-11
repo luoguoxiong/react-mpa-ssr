@@ -6,6 +6,10 @@ const Nsp_ = Loadable({
   loader: () => import(/* webpackChunkName: 'Nsp_' */ '../page/')
 });
 
+const Nsp_sort = Loadable({
+  loader: () => import(/* webpackChunkName: 'Nsp_sort' */ '../page/sort')
+});
+
 const Nsp_topic = Loadable({
   loader: () => import(/* webpackChunkName: 'Nsp_topic' */ '../page/topic')
 });
@@ -14,6 +18,10 @@ const routes = [
   {
     path: "/",
     component: <Nsp_ />
+  },
+  {
+    path: "/sort",
+    component: <Nsp_sort />
   },
   {
     path: "/topic",
