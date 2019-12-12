@@ -40,8 +40,8 @@ nsp
     ├─ views                             koa-views渲染模板
 ├─ src                                   页面相关目录
     ├─ .nsp                              自动生成的路由文件
-	├─ page                              页面路由文件
-	├─ static                            静态文件
+    ├─ page                              页面路由文件
+    ├─ static                            静态文件
 ├─ webpack                               webpack相关配置
 ├─ .nsp.js                               nsp配置文件
 ├─ postcss.config.js                     postcss配置文件
@@ -93,7 +93,7 @@ export default Home;
 
 #### 1.@setInitModel
 
-> 服务端数据与组件建立联系。
+>  服务端预请求数据与组件建立联系。（类似redeux的connect）
 
 #### 2.@Controller
 
