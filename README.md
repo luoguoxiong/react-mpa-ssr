@@ -16,7 +16,7 @@ npm run dev
 npm run build
 ```
 
-## analyze
+## Analyze
 
 ```powershell
 npm run analyze
