@@ -14,6 +14,12 @@ npm run dev
 npm run build
 ```
 
+## analyze
+
+```powershell
+npm run analyze
+```
+
 ## Directory
 
 ```npm
@@ -81,9 +87,42 @@ class Home {
 export default Home;
 ```
 
-## 已完成的东西
+## Api
 
-> 1. src/page文件自动生成客服端路由文件
+### Client(页面)
+
+#### 1.@setInitModel
+
+> 服务端数据与组件建立联系。
+
+#### 2.Inject
+
+> `window.__initModel__`数据注入到组件内。
+
+### Server（koa服务）
+
+#### 1.@Controller
+
+> 1. 声明当前类是个控制器。
+>
+> 2. 在/service/controller文件建立控制器，并在改使用@Controller。
+
+#### 2.  @RequestMapping({ method = String, url = String })
+
+> 1. 声明当前类的方法的请求方式和请求路由。
+> 2. method: Get、Post;url:请求路径。
+> 3. 注意：在当前类，方法名不要重复！
+
+#### 3.@NspRender({ title = String })
+
+> 1. 声明当前方法是用于服务端渲染。
+> 2. title: 当前渲染的html的title名称。
+> 3. 使用ctx.initModel = 'youData'注入数据
+> 4. 使用ctx.title = 'xxtitle'覆盖装饰器的title
+
+## Complete
+
+> 1. 自动编译`src/page`目录下文件，生成路由文件
 > 2. 服务端日志
 > 3. 放弃redux,简单使用context注入数据
 > 4. 热更新
