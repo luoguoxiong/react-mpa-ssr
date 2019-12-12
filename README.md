@@ -1,14 +1,16 @@
 # NSP
 
 > Nsp以React、Koa、React-loadable搭建的MPA模式的React同构方案。
+>
+> demo预览地址：http://www.nodesp.top:8082
 
-## development
+## Development
 
 ```powershell
 npm run dev
 ```
 
-## production
+## Production
 
 ```powershell
 npm run build
@@ -88,8 +90,6 @@ export default Home;
 ```
 
 ## Api
-
-### Client(页面)
 
 #### 1.@setInitModel
 
