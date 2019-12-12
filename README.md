@@ -95,30 +95,24 @@ export default Home;
 
 > 服务端数据与组件建立联系。
 
-#### 2.Inject
-
-> `window.__initModel__`数据注入到组件内。
-
-### Server（koa服务）
-
-#### 1.@Controller
+#### 2.@Controller
 
 > 1. 声明当前类是个控制器。
 >
 > 2. 在/service/controller文件建立控制器，并在改使用@Controller。
 
-#### 2.  @RequestMapping({ method = String, url = String })
+#### 3. @RequestMapping({ method = String, url = String })
 
 > 1. 声明当前类的方法的请求方式和请求路由。
 > 2. method: Get、Post;url:请求路径。
-> 3. 注意：在当前类，方法名不要重复！
+> 3. 注意：在当前类，方法名不要重复。
 
-#### 3.@NspRender({ title = String })
+#### 4.@NspRender({ title = String })
 
 > 1. 声明当前方法是用于服务端渲染。
 > 2. title: 当前渲染的html的title名称。
-> 3. 使用ctx.initModel = 'youData'注入数据
-> 4. 使用ctx.title = 'xxtitle'覆盖装饰器的title
+> 3. 使用ctx.initModel = 'youData'注入数据。
+> 4. 使用ctx.title = 'xxtitle'覆盖装饰器的title。
 
 ## Complete
 
@@ -128,8 +122,14 @@ export default Home;
 > 4. 热更新
 > 5. 按需加载
 
-## End
+## 缺陷
 
-> ​		最近工作的一年时间里，基本都是在玩React同构相关的东西，从公司的React（注水）框架，到后来放弃使用,转用Next.js。发现里面很多有趣的东西，才有了我的nsp。哈哈~发现跟jsp有相似点，就顺便调戏下自己刚工作时写过的jsp，所以取名Nsp。
+> 1.热更新只是客户端资源的热更新，服务端通过nodemon每次都是重启服务，webpack执行时间稍长。
+>
+> 2.引用第三方组件库不是很兼容，如：antd-design，（样式引入问题，可引入其库的css cdn地址！）
 
-### 喜欢的朋友，顺手帮忙点个赞吧~万分感谢！
+## 兼容性
+
+> IE9+,及其主流浏览器
+
+### 喜欢的朋友，顺手帮忙点个赞吧~万分感谢！ - _ -！
