@@ -16,6 +16,8 @@ const { ReactLoadablePlugin } = require("nsploadable/webpack");
 
 const rootPath = path.resolve(__dirname, "../");
 
+const { cdnPrefix } = require("../.nsp");
+
 const loadable = path.join(rootPath, "/build/loadable.json");
 
 const manifest = path.join(rootPath, "/build/manifest.json");
@@ -23,6 +25,7 @@ const manifest = path.join(rootPath, "/build/manifest.json");
 const prefixName =
   process.env.NODE_ENV == "production" ? "[name].[contenthash:8]" : "[name]";
 
+const publicPath = process.env.NODE_ENV == "production" ? cdnPrefix : "/";
 module.exports = {
   entry: {
     assets: ["./src/index.js"]
@@ -30,7 +33,7 @@ module.exports = {
   output: {
     filename: `Nsp_${prefixName}.js`,
     path: path.resolve(rootPath, "./build"),
-    publicPath: "/",
+    publicPath,
     chunkFilename: `${prefixName}.js`
   },
   performance: {

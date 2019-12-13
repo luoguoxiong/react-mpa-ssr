@@ -4,8 +4,10 @@
   "description": "nsp是koa+react服务端渲染框架",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon node bin/index.js",
-    "build": "cross-env NODE_ENV=production node bin/index.js",
-    "analyze": "cross-env Analyze=true webpack --config  webpack/webpack.config.prod.js"
+    "build": "run-s webpack server",
+    "webpack": "cross-env NODE_ENV=production webpack --config  webpack/webpack.config.prod.js",
+    "server": "cross-env NODE_ENV=production node bin/index.js",
+    "analyze": "cross-env NODE_ENV=production Analyze=true webpack --config  webpack/webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
