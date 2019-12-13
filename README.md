@@ -124,9 +124,11 @@ export default Home;
 
 ## 缺陷
 
-> 1.热更新只是客户端资源的热更新，服务端通过nodemon每次都是重启服务，webpack执行时间稍长。
+> 1.热更新只是客户端资源的热更新，服务端通过nodemon每次都是重启服务，webpack执行时间稍长（尝试过webpack dll类似的打包缓存之类的插件，发现官方库并不支持webpack-dev-server...）。
 >
 > 2.引用第三方组件库不是很兼容，如：antd-design，（样式引入问题，可引入其库的css cdn地址！）
+>
+> 3.不支持css module,css命名可能会冲突（不过这个是可以避免的-_-！）。
 
 ## 兼容性
 
