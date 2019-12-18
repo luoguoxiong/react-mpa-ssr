@@ -8,6 +8,8 @@ import RouterAnalyze from "@lib/analyze";
 import dev from "./utils/dev";
 const entry = resolve(__dirname, "../src/page");
 const output = resolve(__dirname, "../src/.nsp/router.js");
+import webpack from "webpack";
+import webpackConfig from "../webpack/webpack.config.prod";
 class App {
   constructor(middlewares, port) {
     this.app = new Koa();
@@ -78,7 +80,9 @@ class App {
 
   runPro() {
     new RouterAnalyze(entry, output, () => {
-      this.createHttpServer();
+      webpack(webpackConfig, () => {
+        this.createHttpServer();
+      });
     });
   }
 }
