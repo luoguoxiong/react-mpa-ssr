@@ -2,7 +2,7 @@
 
 > Nsp 以 React、Koa、React-loadable 搭建的 MPA 模式的 React 同构方案。
 >
-> demo 预览地址：http://www.nodesp.top:8082
+> demo 预览地址：http://39.108.84.221:8082
 
 ## Development
 
